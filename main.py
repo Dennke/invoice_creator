@@ -3,11 +3,11 @@ from tkinter.filedialog import askopenfilenames
 from PyPDF2 import PdfFileReader, PdfFileWriter
 import os
 
-HEADER = './.idea/template/kopf.pdf'
-BLANK = './.idea/template/blank_din4.pdf'
-UST_DE = './.idea/template/ust-de.pdf'
-UST_ENG = './.idea/template/ust-eng.pdf'
-UST_FRA = './.idea/template/ust-fra.pdf'
+HEADER = './template/kopf.pdf'
+BLANK = './template/blank_din4.pdf'
+UST_DE = './template/ust-de.pdf'
+UST_ENG = './template/ust-eng.pdf'
+UST_FRA = './template/ust-fra.pdf'
 
 
 Tk().withdraw()
