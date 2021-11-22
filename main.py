@@ -76,3 +76,5 @@ for filename in filenames:
 
         pdfWriter.write(resultPdfFile)
         pdfWriter.removeText()
+
+    os.remove(filename)
