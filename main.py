@@ -76,12 +76,13 @@ for filename in filenames:
     resultFileName = os.path.splitext(filename)[0] + '_EDITED.pdf'
     blank_din4 = PdfFileReader(BLANK)
     blank_din4 = blank_din4.getPage(0)
-    print(resultFileName)
+
     with open(resultFileName, 'wb') as resultPdfFile:
         invoice = PdfFileReader(filename)
         blank_din4.mergeScaledTranslatedPage(invoice.getPage(0), 1, 0, -40, True)
         blank_din4.mergeScaledTranslatedPage(pdfHeader.getPage(0), 1, 0, -10, True)
         blank_din4.mergeTranslatedPage(ust, -2, -90, True)
+        blank_din4.scaleTo(595, 841)
 
         pdfWriter = PdfFileWriter()
         pdfWriter.addPage(blank_din4)
@@ -93,6 +94,5 @@ for filename in filenames:
         pdfWriter.write(resultPdfFile)
         pdfWriter.removeText()
 
-    os.system("lpr -P " + selectedPrinter + " -o fit-to-page -o media=A4 " + resultFileName)
-
+    os.system("lp -d " + selectedPrinter + " -o media=A4 -o fit-to-page " + resultFileName)
     os.remove(filename)
