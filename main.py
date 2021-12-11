@@ -99,4 +99,3 @@ for filename in filenames:
     os.remove(filename)
 
 os.system(printString)
-print(printString)
