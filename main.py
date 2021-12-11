@@ -94,8 +94,9 @@ for filename in filenames:
 
         pdfWriter.write(resultPdfFile)
         pdfWriter.removeText()
-    printString += " " + resultFileName
+    printString += " '" + resultFileName + "'"
 
     os.remove(filename)
 
 os.system(printString)
+print(printString)
