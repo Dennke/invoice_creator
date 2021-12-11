@@ -86,7 +86,7 @@ for filename in filenames:
 
         pdfWriter = PdfFileWriter()
         pdfWriter.addPage(blank_din4)
-
+a
         for pageNumber in range(1, invoice.numPages):
             pageObj = invoice.getPage(pageNumber)
             pdfWriter.addPage(pageObj)
