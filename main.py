@@ -1,4 +1,6 @@
-from tkinter import Tk, IntVar, Label, W, Radiobutton, Button, mainloop, TOP, BOTTOM, Frame, LEFT, CENTER, RIGHT
+import subprocess
+from tkinter import Tk, IntVar, Label, W, Radiobutton, Button, mainloop, TOP, BOTTOM, Frame, LEFT, CENTER, RIGHT, \
+    StringVar, OptionMenu
 from tkinter.filedialog import askopenfilenames
 from PyPDF2 import PdfFileReader, PdfFileWriter
 import os
@@ -26,6 +28,8 @@ var.set(0)
 
 def quit_loop():
     global chosen_ust
+    global selectedPrinter
+    selectedPrinter = printer.get()
     chosen_ust = UST_DE
     if var.get() == 1:
         chosen_ust = UST_ENG
@@ -41,12 +45,25 @@ def quit_program():
 master.protocol("WM_DELETE_WINDOW", quit_program)
 
 bottomFrame = Frame(master)
+middleFrame = Frame(master)
+
+printerList = subprocess.getoutput("lptstat -p | awk '{print $2}'")
+printerList = printerList.split("\n")
+
+printer = StringVar(master)
+printer.set(printerList[0])
+
+
 
 
 Label(master, text="Sprache").pack()
 Radiobutton(master, text="Deutsch", variable=var, value=0).pack()
 Radiobutton(master, text="Englisch", variable=var, value=1).pack()
 Radiobutton(master, text="Französisch", variable=var, value=2).pack()
+
+middleFrame.pack()
+OptionMenu(middleFrame, printer, *printerList).pack()
+
 bottomFrame.pack()
 Button(bottomFrame, text="OK", command=quit_loop).pack(ipadx=15, side=LEFT, padx=10)
 Button(bottomFrame, text="Exit", command=quit_program).pack(ipadx=15, side=LEFT)
