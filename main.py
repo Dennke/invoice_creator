@@ -73,8 +73,6 @@ pdfHeader = PdfFileReader(HEADER)
 ust = PdfFileReader(chosen_ust)
 ust = ust.getPage(0)
 
-resultFileNameList = {}
-
 for filename in filenames:
     resultFileName = os.path.splitext(filename)[0] + '_EDITED.pdf'
     blank_din4 = PdfFileReader(BLANK)
@@ -96,7 +94,7 @@ for filename in filenames:
 
         pdfWriter.write(resultPdfFile)
         pdfWriter.removeText()
-    os.system("lp -d " + selectedPrinter + " -o media=A4 -o fit-to-page " + resultFileNameList)
+    os.system("lp -d " + selectedPrinter + " -o media=A4 -o fit-to-page " + resultFileName)
     time.sleep(1)
     os.remove(filename)
 
