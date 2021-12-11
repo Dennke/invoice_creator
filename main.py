@@ -93,6 +93,6 @@ for filename in filenames:
         pdfWriter.write(resultPdfFile)
         pdfWriter.removeText()
 
-    os.system("lpr -P" + selectedPrinter + " -o fit-to-page -o media=A4 " + resultFileName)
+    os.system("lpr -P " + selectedPrinter + " -o fit-to-page -o media=A4 " + resultFileName)
 
     os.remove(filename)
