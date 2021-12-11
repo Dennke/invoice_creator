@@ -47,7 +47,7 @@ master.protocol("WM_DELETE_WINDOW", quit_program)
 bottomFrame = Frame(master)
 middleFrame = Frame(master)
 
-printerList = subprocess.getoutput("lptstat -p | awk '{print $2}'")
+printerList = subprocess.getoutput("lpstat -p | awk '{print $2}'")
 printerList = printerList.split("\n")
 
 printer = StringVar(master)
