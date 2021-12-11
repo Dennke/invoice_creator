@@ -18,6 +18,7 @@ if not filenames:
     quit()
 
 master = Tk()
+master.eval('tk::PlaceWindow . center')
 master.geometry('250x150')
 var = IntVar(master)
 var.set(0)
