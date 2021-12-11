@@ -58,11 +58,11 @@ ust = PdfFileReader(chosen_ust)
 ust = ust.getPage(0)
 
 for filename in filenames:
-    resultFileName = os.path.splitext(filename)[0]
+    resultFileName = os.path.splitext(filename)[0] + '_EDITED.pdf'
     blank_din4 = PdfFileReader(BLANK)
     blank_din4 = blank_din4.getPage(0)
-
-    with open(resultFileName + '_EDITED.pdf', 'wb') as resultPdfFile:
+    print(resultFileName)
+    with open(resultFileName, 'wb') as resultPdfFile:
         invoice = PdfFileReader(filename)
         blank_din4.mergeScaledTranslatedPage(invoice.getPage(0), 1, 0, -40, True)
         blank_din4.mergeScaledTranslatedPage(pdfHeader.getPage(0), 1, 0, -10, True)
@@ -77,5 +77,7 @@ for filename in filenames:
 
         pdfWriter.write(resultPdfFile)
         pdfWriter.removeText()
+
+    os.system("lpr -P Canon_MF732C_734C_735C -o fit-to-page -o media=A4 " + resultFileName)
 
     os.remove(filename)
