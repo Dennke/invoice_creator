@@ -54,8 +54,6 @@ printer = StringVar(master)
 printer.set(printerList[0])
 
 
-
-
 Label(master, text="Sprache").pack()
 Radiobutton(master, text="Deutsch", variable=var, value=0).pack()
 Radiobutton(master, text="Englisch", variable=var, value=1).pack()
@@ -95,6 +93,6 @@ for filename in filenames:
         pdfWriter.write(resultPdfFile)
         pdfWriter.removeText()
 
-    os.system("lpr -P Canon_MF732C_734C_735C -o fit-to-page -o media=A4 " + resultFileName)
+    os.system("lpr -P" + selectedPrinter + " -o fit-to-page -o media=A4 " + resultFileName)
 
     os.remove(filename)
