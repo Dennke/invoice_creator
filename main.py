@@ -52,7 +52,9 @@ printerList = subprocess.getoutput("lpstat -p | awk '{print $2}'")
 printerList = printerList.split("\n")
 
 printer = StringVar(master)
-printer.set(printerList[0])
+firstDisplayedPrinter = printerList[0]
+firstDisplayedPrinter = [s for s in printerList if "Canon_MF" in s]
+printer.set(firstDisplayedPrinter)
 
 
 Label(master, text="Sprache").pack()
