@@ -1,5 +1,4 @@
 import subprocess
-import time
 from tkinter import Tk, IntVar, Label, W, Radiobutton, Button, mainloop, TOP, BOTTOM, Frame, LEFT, CENTER, RIGHT, \
     StringVar, OptionMenu
 from tkinter.filedialog import askopenfilenames
@@ -11,7 +10,6 @@ BLANK = './template/blank_din4.pdf'
 UST_DE = './template/ust-de.pdf'
 UST_ENG = './template/ust-eng.pdf'
 UST_FRA = './template/ust-fra.pdf'
-
 
 Tk().withdraw()
 
@@ -53,7 +51,10 @@ printerList = printerList.split("\n")
 
 printer = StringVar(master)
 firstDisplayedPrinter = printerList[0]
-firstDisplayedPrinter = [s for s in printerList if "Canon_MF" in s]
+for s in printerList:
+    if "Canon_MF" in s:
+        firstDisplayedPrinter = s
+        break
 printer.set(firstDisplayedPrinter)
 
 
@@ -96,8 +97,7 @@ for filename in filenames:
 
         pdfWriter.write(resultPdfFile)
         pdfWriter.removeText()
-    printString += " '" + resultFileName + "'"
+    printString += ' "' + resultFileName + '"'
 
     os.remove(filename)
-
 os.system(printString)
