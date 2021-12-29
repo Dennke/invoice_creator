@@ -1,3 +1,5 @@
+import random
+import string
 import subprocess
 from tkinter import Tk, IntVar, Label, W, Radiobutton, Button, mainloop, TOP, BOTTOM, Frame, LEFT, CENTER, RIGHT, \
     StringVar, OptionMenu
@@ -77,12 +79,14 @@ ust = PdfFileReader(chosen_ust)
 ust = ust.getPage(0)
 printString = "lp -d " + selectedPrinter + " -o media=A4 -o fit-to-page -o duplex=none"
 for filename in filenames:
-    resultFileName = os.path.splitext(filename)[0] + '_EDITED.pdf'
+    randomString = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(5))
+    resultFileName = os.path.splitext(filename)[0] + '_' + randomString + '_EDITED.pdf'
     blank_din4 = PdfFileReader(BLANK)
     blank_din4 = blank_din4.getPage(0)
 
     with open(resultFileName, 'wb') as resultPdfFile:
         invoice = PdfFileReader(filename)
+
         blank_din4.mergeScaledTranslatedPage(invoice.getPage(0), 1, 0, -40, True)
         blank_din4.mergeScaledTranslatedPage(pdfHeader.getPage(0), 1, 0, -10, True)
         blank_din4.mergeTranslatedPage(ust, -2, -90, True)
@@ -100,9 +104,6 @@ for filename in filenames:
     printString += ' "' + resultFileName + '"'
 
     os.remove(filename)
-<<<<<<< HEAD
 
-os.system(printString
-=======
 os.system(printString)
->>>>>>> 755f11efea32b79092dd57e720b7098084887ccc
+
